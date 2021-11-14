@@ -60,7 +60,7 @@ function showTasksWithStatus(status) {
   }
 }
 
-const showTasksWithPriority = (priority) => {
+function showTasksWithPriority(priority) {
   if (!isAnyTaskWithGivenPriority(priority)) {
     console.log(priority + ":");
     console.log("-");
@@ -73,18 +73,18 @@ const showTasksWithPriority = (priority) => {
       console.log(item.name);
     });
   }
-};
+}
 
-const isAnyTaskWithGivenStatus = (status) => {
+function isAnyTaskWithGivenStatus(status) {
   const taskItemWithGivenStatus = list.find((item) => item.status === status);
   if (taskItemWithGivenStatus !== undefined) {
     return true;
   } else {
     return false;
   }
-};
+}
 
-const isAnyTaskWithGivenPriority = (priority) => {
+function isAnyTaskWithGivenPriority(priority) {
   const taskItemWithGivenPriority = list.find(
     (item) => item.priority === priority
   );
@@ -93,7 +93,7 @@ const isAnyTaskWithGivenPriority = (priority) => {
   } else {
     return false;
   }
-};
+}
 
 addTask("make bed");
 addTask("eat");
