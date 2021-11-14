@@ -1,108 +1,97 @@
-const statusToDo = "To Do";
-const statusInProgress = "In Progress";
-const statusDone = "Done";
-const priorityLow = "Low";
-const priorityHigh = "High";
+const STATUS_TO_DO = "To Do";
+const STATUS_IN_PROGRESS = "In Progress";
+const STATUS_DONE = "Done";
+const PRIORITY_LOW = "Low";
+const PRIORITY_HIGH = "High";
 
 let list = [];
 
-const getTaskItem = (task) => {
+const itemOfTask = (task) => {
   return list.find((item) => item.name === task);
 };
 
-const changeStatus = (task, status) => {
-  getTaskItem(task).status = status;
-};
+function changeStatus(task, status) {
+  itemOfTask(task).status = status;
+}
 
-const changePriority = (task, priority) => {
-  getTaskItem(task).priority = priority;
-};
+function changePriority(task, priority) {
+  itemOfTask(task).priority = priority;
+}
 
-const addTask = (task) => {
-  if (list.length === 0) {
-    lastItemId = 0;
-  } else {
-    let lastItemIndex = list.length - 1;
-    lastItemId = list[lastItemIndex].id;
-  }
-
+function addTask(task) {
   list.push({
-    id: lastItemId + 1,
+    id: list.length + 1,
     name: task,
-    status: statusToDo,
-    priority: priorityLow,
+    status: STATUS_TO_DO,
+    priority: PRIORITY_LOW,
   });
-};
+}
 
-const deleteTask = (task) => {
-  let taskItemIndex = getTaskItem(task).id - 1;
+function deleteTask(task) {
+  const taskItemIndex = list.findIndex(function (item) {
+    return item.name === task;
+  });
   list.splice(taskItemIndex, 1);
-};
+}
 
-const showTasksWithStatus = (status) => {
-  if (!isAnyTaskWithStatus(status)) {
+function showListByStatus() {
+  showTasksWithStatus(STATUS_TO_DO);
+  showTasksWithStatus(STATUS_IN_PROGRESS);
+  showTasksWithStatus(STATUS_DONE);
+}
+
+function showListByPriority() {
+  showTasksWithPriority(PRIORITY_LOW);
+  showTasksWithPriority(PRIORITY_HIGH);
+}
+
+function showTasksWithStatus(status) {
+  if (!isAnyTaskWithGivenStatus(status)) {
     console.log(status + ":");
     console.log("-");
   } else {
-    let taskItems = list.filter((item) => item.status == status);
+    const taskItemsWithGivenStatus = list.filter(
+      (item) => item.status == status
+    );
     console.log(`${status}:`);
-    taskItems.forEach((item) => {
+    taskItemsWithGivenStatus.forEach((item) => {
       console.log(item.name);
     });
   }
-};
-
-const showListByStatus = () => {
-  showTasksWithStatus(statusToDo);
-  showTasksWithStatus(statusInProgress);
-  showTasksWithStatus(statusDone);
-};
+}
 
 const showTasksWithPriority = (priority) => {
-  if (!isAnyTaskWithPriority(priority)) {
+  if (!isAnyTaskWithGivenPriority(priority)) {
     console.log(priority + ":");
     console.log("-");
   } else {
-    let taskItems = list.filter((item) => item.priority == priority);
+    const taskItemsWithGivenPriority = list.filter(
+      (item) => item.priority === priority
+    );
     console.log(`${priority}:`);
-    taskItems.forEach((item) => {
+    taskItemsWithGivenPriority.forEach((item) => {
       console.log(item.name);
     });
   }
 };
 
-const showListByPriority = () => {
-  showTasksWithPriority(priorityLow);
-  showTasksWithPriority(priorityHigh);
-};
-
-const isAnyTaskWithStatus = (status) => {
-  let taskItem = list.find((item) => item.status == status);
-  if (taskItem !== undefined) {
+const isAnyTaskWithGivenStatus = (status) => {
+  const taskItemWithGivenStatus = list.find((item) => item.status === status);
+  if (taskItemWithGivenStatus !== undefined) {
     return true;
   } else {
     return false;
   }
 };
 
-const isAnyTaskWithPriority = (priority) => {
-  let taskItem = list.find((item) => item.priority == priority);
-  if (taskItem !== undefined) {
+const isAnyTaskWithGivenPriority = (priority) => {
+  const taskItemWithGivenPriority = list.find(
+    (item) => item.priority === priority
+  );
+  if (taskItemWithGivenPriority !== undefined) {
     return true;
   } else {
     return false;
-  }
-};
-
-const isStatusCorrect = (status) => {
-  const correctStatus = statusToDo || statusInProgress || statusDone;
-  if (taskItem === undefined) {
-    console.log("There is no such task in the list");
-  } else if (status !== correctStatus) {
-    console.log(
-      `Choose the right status. ${statusToDo},${statusInProgress} or ${statusDone}.`
-    );
-  } else {
   }
 };
 
@@ -115,8 +104,8 @@ addTask("buy groceries");
 console.log(list);
 
 console.log(`\nМеняем статусы "eat" и "make bed"`);
-changeStatus("eat", statusDone);
-changeStatus("make bed", statusDone);
+changeStatus("eat", STATUS_DONE);
+changeStatus("make bed", STATUS_DONE);
 console.log(list);
 
 console.log(`\nУдаляем задачу 3`);
