@@ -6,17 +6,19 @@ const priorityHigh = "High";
 
 let list = [];
 
-let changeStatus = (task, status) => {
-  let taskItem = list.find((item) => item.name == task);
-  taskItem.status = status;
+const getTaskItem = (task) => {
+  return list.find((item) => item.name === task);
 };
 
-let changePriority = (task, priority) => {
-  let taskItem = list.find((item) => item.name == task);
-  taskItem.priority = priority;
+const changeStatus = (task, status) => {
+  getTaskItem(task).status = status;
 };
 
-let addTask = (task) => {
+const changePriority = (task, priority) => {
+  getTaskItem(task).priority = priority;
+};
+
+const addTask = (task) => {
   if (list.length === 0) {
     lastItemId = 0;
   } else {
@@ -32,13 +34,12 @@ let addTask = (task) => {
   });
 };
 
-let deleteTask = (task) => {
-  let taskItem = list.find((item) => item.name == task);
-  let taskItemIndex = taskItem.id - 1;
+const deleteTask = (task) => {
+  let taskItemIndex = getTaskItem(task).id - 1;
   list.splice(taskItemIndex, 1);
 };
 
-let showTasksWithStatus = (status) => {
+const showTasksWithStatus = (status) => {
   if (!isAnyTaskWithStatus(status)) {
     console.log(status + ":");
     console.log("-");
@@ -51,13 +52,13 @@ let showTasksWithStatus = (status) => {
   }
 };
 
-let showListByStatus = () => {
+const showListByStatus = () => {
   showTasksWithStatus(statusToDo);
   showTasksWithStatus(statusInProgress);
   showTasksWithStatus(statusDone);
 };
 
-let showTasksWithPriority = (priority) => {
+const showTasksWithPriority = (priority) => {
   if (!isAnyTaskWithPriority(priority)) {
     console.log(priority + ":");
     console.log("-");
@@ -70,12 +71,12 @@ let showTasksWithPriority = (priority) => {
   }
 };
 
-let showListByPriority = () => {
+const showListByPriority = () => {
   showTasksWithPriority(priorityLow);
   showTasksWithPriority(priorityHigh);
 };
 
-let isAnyTaskWithStatus = (status) => {
+const isAnyTaskWithStatus = (status) => {
   let taskItem = list.find((item) => item.status == status);
   if (taskItem !== undefined) {
     return true;
@@ -84,7 +85,7 @@ let isAnyTaskWithStatus = (status) => {
   }
 };
 
-let isAnyTaskWithPriority = (priority) => {
+const isAnyTaskWithPriority = (priority) => {
   let taskItem = list.find((item) => item.priority == priority);
   if (taskItem !== undefined) {
     return true;
@@ -93,7 +94,7 @@ let isAnyTaskWithPriority = (priority) => {
   }
 };
 
-let isStatusCorrect = (status) => {
+const isStatusCorrect = (status) => {
   const correctStatus = statusToDo || statusInProgress || statusDone;
   if (taskItem === undefined) {
     console.log("There is no such task in the list");
