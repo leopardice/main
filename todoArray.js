@@ -3,7 +3,7 @@ const STATUS_IN_PROGRESS = "In Progress";
 const STATUS_DONE = "Done";
 const PRIORITY_LOW = "Low";
 const PRIORITY_HIGH = "High";
-let idCounter = 1;
+let idCounter = 0;
 
 let list = [];
 
@@ -21,12 +21,11 @@ function changePriority(task, priority) {
 
 function addTask(task) {
   list.push({
-    id: idCounter,
+    id: ++idCounter,
     name: task,
     status: STATUS_TO_DO,
     priority: PRIORITY_LOW,
   });
-  idCounter++;
 }
 
 function deleteTask(task) {
@@ -125,7 +124,7 @@ changeStatus("eat", STATUS_DONE);
 changeStatus("make bed", STATUS_DONE);
 console.log(list);
 
-console.log(`\nУдаляем задачу 3`);
+console.log(`\nУдаляем задачу 3 и добавляем обратно`);
 deleteTask("study arrays");
 addTask("study arrays");
 console.log(list);
