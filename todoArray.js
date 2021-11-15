@@ -35,21 +35,31 @@ function deleteTask(task) {
 }
 
 function showListByStatus() {
-  showTasksWithStatus(STATUS_TO_DO);
-  showTasksWithStatus(STATUS_IN_PROGRESS);
-  showTasksWithStatus(STATUS_DONE);
+  showTasksWithGivenStatus(STATUS_TO_DO);
+  showTasksWithGivenStatus(STATUS_IN_PROGRESS);
+  showTasksWithGivenStatus(STATUS_DONE);
 }
 
 function showListByPriority() {
-  showTasksWithPriority(PRIORITY_LOW);
-  showTasksWithPriority(PRIORITY_HIGH);
+  showTasksWithGivenPriority(PRIORITY_LOW);
+  showTasksWithGivenPriority(PRIORITY_HIGH);
 }
 
-function showTasksWithStatus(status) {
-  if (!isAnyTaskWithGivenStatus(status)) {
-    console.log(status + ":");
+function showTasksWithGivenStatus(status) {
+  console.log(`${status}:`);
+
+  if (noTaskWithGivenStatus(status)) {
     console.log("-");
-  } else {
+    return;
+  }
+
+  for (let item of list) {
+    if (item.status === status) {
+      console.log(item.name);
+    }
+  }
+
+  /* else {
     const taskItemsWithGivenStatus = list.filter(
       (item) => item.status == status
     );
@@ -57,42 +67,47 @@ function showTasksWithStatus(status) {
     taskItemsWithGivenStatus.forEach((item) => {
       console.log(item.name);
     });
-  }
+  } */
 }
 
-function showTasksWithPriority(priority) {
-  if (!isAnyTaskWithGivenPriority(priority)) {
-    console.log(priority + ":");
+function showTasksWithGivenPriority(priority) {
+  console.log(`${priority}:`);
+
+  if (noTaskWithGivenPriority(priority)) {
     console.log("-");
-  } else {
-    const taskItemsWithGivenPriority = list.filter(
-      (item) => item.priority === priority
-    );
-    console.log(`${priority}:`);
-    taskItemsWithGivenPriority.forEach((item) => {
+    return;
+  }
+
+  for (let item of list) {
+    if (item.priority === priority) {
       console.log(item.name);
-    });
+    }
   }
 }
 
-function isAnyTaskWithGivenStatus(status) {
-  const taskItemWithGivenStatus = list.find((item) => item.status === status);
+function noTaskWithGivenStatus(status) {
+  for (item of list) {
+    if (item.status === status) {
+      return false;
+    }
+  }
+  return true;
+
+  /* const taskItemWithGivenStatus = list.find((item) => item.status === status);
   if (taskItemWithGivenStatus !== undefined) {
     return true;
   } else {
     return false;
-  }
+  } */
 }
 
-function isAnyTaskWithGivenPriority(priority) {
-  const taskItemWithGivenPriority = list.find(
-    (item) => item.priority === priority
-  );
-  if (taskItemWithGivenPriority !== undefined) {
-    return true;
-  } else {
-    return false;
+function noTaskWithGivenPriority(priority) {
+  for (item of list) {
+    if (item.priority === priority) {
+      return false;
+    }
   }
+  return true;
 }
 
 addTask("make bed");
