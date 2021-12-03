@@ -1,0 +1,94 @@
+html {
+  box-sizing: border-box;
+}
+
+*,
+*:before,
+*:after {
+  box-sizing: inherit;
+}
+
+body {
+  font-family: "Work Sans", sans-serif;
+  font-weight: 400;
+  color: #ffffff;
+  background-color: cornflowerblue;
+  line-height: 1;
+}
+
+.container {
+  background-color: #17171c;
+  width: 364px;
+  height: 582px;
+  padding: 20px;
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+}
+
+.numbers {
+  height: 96px;
+  width: 324px;
+  font-size: 96px;
+  font-style: normal;
+  font-weight: 300;
+  letter-spacing: 0em;
+  text-align: right;
+}
+
+.row {
+  display: flex;
+  margin-bottom: 16px;
+}
+
+.row:last-child {
+  margin-bottom: 0;
+}
+
+.btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 24px;
+  padding: 12px 12px;
+  border-radius: 24px;
+  height: 72px;
+  width: 69px;
+  border-radius: 24px;
+  background-color: #2e2f38;
+  font-size: 32px;
+  color: #ffffff;
+  font-family: "Work Sans", sans-serif;
+  border: 0;
+  margin-right: 16px;
+  cursor: pointer;
+}
+
+.btn:hover {
+  background-color: #373842;
+}
+
+.row .btn:last-child {
+  margin-right: 0;
+}
+
+.btn-c {
+  background-color: #4e505f;
+  height: 72px;
+  width: 153.3px;
+}
+
+.btn-del {
+  background: #2e2f38 url(img/Union.svg) no-repeat center center;
+}
+
+.btn-blue {
+  background-color: #4b5efc;
+}
+
+.btn-0 {
+  width: 238.33px;
+  height: 72px;
+}
